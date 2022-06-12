@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 1010;
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const uri = `mongodb+srv://eco-clean-admin:eco-clean-admin@cluster0.pkxrx.mongodb.net/retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.username}:${process.env.password}@cluster0.pkxrx.mongodb.net/retryWrites=true&w=majority`;
+// const uri = `mongodb+srv://eco-clean-admin:eco-clean-admin@cluster0.pkxrx.mongodb.net/retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
