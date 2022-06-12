@@ -44,16 +44,31 @@ client.connect(err => {
         // =================================== Admin ===================================
 
         // Insert Service for admin
+        // app.post('/add-service', (req, res) => {
+
+        //     const service = req.body;
+        //     serviceCollection.insertOne(service)
+        //     .then(result => {
+        //         console.log('Data Insert Success✅');
+        //         res.send('/add-service')
+        //     })
+
+
+        // })
+
+
         app.post('/add-service', (req, res) => {
 
             const service = req.body;
             console.log(service);
 
             insertData(serviceCollection, service)
+            .then(result => {
+                // res.redirect('/add-service')
+                console.log(result);
+            })
 
         })
-
-
 
 
         // Order List
@@ -86,6 +101,7 @@ client.connect(err => {
                 })
                 .then(result => {
                     console.log(result);
+                    res.send('/manage-services')
                 })
 
         })
@@ -97,6 +113,7 @@ client.connect(err => {
             serviceCollection.deleteOne({ _id: ObjectId(req.params.id) })
                 .then(result => {
                     console.log(result);
+                    res.send('/manage-services');
                 })
         })
 
@@ -128,13 +145,11 @@ client.connect(err => {
             console.log(order);
 
             insertData(orderListCollection, order)
-
         })
 
 
 
         // User Review
-
         app.post('/add-review', (req, res) => {
             const review = req.body.review;
             console.log(review);
@@ -142,10 +157,13 @@ client.connect(err => {
             insertData(reviewCollection, review);
         })
 
+
+        // Read Review Data
+        readData(reviewCollection, '/review');
+
+
+
         // =================================== User ===================================
-
-
-
     }
 
 
@@ -161,7 +179,7 @@ const insertData = (myCollection, data) => {
         if (err) {
             console.log("Data Insert Failed❌");
         } else {
-            console.log("Data Insert Success✅");
+            console.log("Data Insert Success✅")
         }
     })
 }
