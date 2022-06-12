@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const cors = require('cors');
-const PORT = process.env.PORT || 1010;
+const PORT = process.env.PORT;
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
